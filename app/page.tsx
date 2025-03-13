@@ -6,10 +6,10 @@ import { ProductCard } from "@/components/product-card"
 import { Header } from "@/components/header"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-type FilterType = "all" | "cocktail" | "drink"
+type FilterType = "all" | "cocktail" | "tapas"
 
 export default function Home() {
-  const [filter, setFilter] = useState<FilterType>("all")
+  const [filter, setFilter] = useState<FilterType>("cocktail")
 
   const filteredProducts = filter === "all" ? products : products.filter((product) => product.type === filter)
 
@@ -20,7 +20,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold mb-8 text-center">Our Menu</h1>
 
         <div className="max-w-md mx-auto mb-8">
-          <Tabs defaultValue="all" className="w-full" onValueChange={(value) => setFilter(value as FilterType)}>
+          <Tabs defaultValue="cocktail" className="w-full" onValueChange={(value) => setFilter(value as FilterType)}>
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger className="flex-1" value="cocktail">Cocktails</TabsTrigger>
               <TabsTrigger className="flex-1" value="tapas">Tapas</TabsTrigger>
