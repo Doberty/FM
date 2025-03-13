@@ -8,6 +8,7 @@ export type Product = {
     recipe: string[]
     imageUrl: string
     dateAdded: string
+    type: 'cocktail' | 'tapas'
   }
   
   

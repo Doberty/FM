@@ -7,17 +7,18 @@ export const products: Product[] = [
     price: 12.99,
     shortDescription: "Amado por Martina",
     description:
-      "Our Classic Mojito combines fresh mint leaves, zesty lime juice, and premium white rum for a refreshing and invigorating experience. Topped with soda water and crushed ice for the perfect balance of sweet and sour.",
+      "Vibrant, refreshing, and unmistakably iconic—Aperol is the perfect balance of bittersweet citrus and herbal elegance. With its striking orange hue and smooth, slightly bitter flavor, this beloved Italian aperitif has been a staple of relaxed afternoons and lively evenings for over a century.",
     ingredients: ["Aperol", "Champagne", "Sparkling water", "Ice"],
     recipe: [
-      "1/4 oz Aperol",
-      "2 1/4 oz Champagne",
-      "Sparkling water",
-      "Ice",
+      "Add ice to a wine glass or a large tumbler until it's about ¾ full",
+      "Add ¼ oz of Aperol over the ice.",
+      "Gently pour in 2 ¼ oz of Champagne to keep the bubbles intact.",
+      "Add a splash of sparkling water to taste, giving it a light, refreshing fizz.",
 
     ],
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Aperol%20Spritz_%20A%20Light%2C%20Citrusy%20Italian%20Cocktail%20-%20The%20Crafted%20Drink-SCsT4IGXeU1gNWeNEjughdPRf0nARk.jpg",
-    dateAdded: "2023-09-15",
+    dateAdded: "2024-011-15",
+    type: "cocktail",
   },
   {
     id: "2",
@@ -29,7 +30,7 @@ export const products: Product[] = [
     ingredients: [
       "0.75 oz Aperol",
       "1.5 oz Tequila",
-      "1 oz Coconut puree",
+      "1 oz Coconut cream",
       "0.75 oz Lime juice",
       "Ice",
       "Shreded lemon/lime zest",
@@ -43,6 +44,7 @@ export const products: Product[] = [
     ],
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Aperol%20Coconut%20Margarita%20-%20Join%20Jules-cw7L9a6ge4ncopqFCaS4IzPXEsnNcp.jpg",
     dateAdded: "2025-03-012",
+    type: "cocktail",
   },
   {
     id: "3",
@@ -60,6 +62,7 @@ export const products: Product[] = [
       "Grapefruit juice",
       "Tonic water",
       "Ice",
+      
     ],
     recipe: [
       "Rim a glass with chili-salt mixture",
@@ -70,14 +73,15 @@ export const products: Product[] = [
     ],
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Galaxy%20Margarita%20with%20Color%20Changing%20Tequila-lhXXojSM4p3rZIerCs8mq4P8C6fMZC.jpg",
     dateAdded: "2024-12-23",
+    type: "cocktail",
  },
   {
     id: "4",
-    name: "Espresso Martini",
+    name: "Pisco Sour",
     price: 15.99,
     shortDescription: "Rich coffee cocktail",
     description:
-      "Our Espresso Martini combines freshly brewed espresso with premium vodka and coffee liqueur for a rich, indulgent experience. Shaken to perfection to create a silky foam top, this cocktail is the perfect pick-me-up.",
+      "The Pisco Sour is a refreshing and elegant cocktail that showcases the versatility of pisco, a grape-based spirit. With a combination of fresh lime juice and simple syrup, it delivers a harmonious blend of tartness and sweetness. Finished with a touch of aromatic bitters, this timeless classic is the perfect choice for any occasion.",
     ingredients: ["Premium Vodka", "Coffee Liqueur", "Fresh Espresso", "Simple Syrup", "Coffee Beans for Garnish"],
     recipe: [
       "Brew a shot of espresso and let it cool slightly",
@@ -88,6 +92,7 @@ export const products: Product[] = [
     ],
     imageUrl: "/placeholder.svg?height=400&width=400",
     dateAdded: "2024-01-05",
+    type: "cocktail",
   },
   {
     id: "5",
@@ -114,6 +119,7 @@ export const products: Product[] = [
     ],
     imageUrl: "/placeholder.svg?height=400&width=400",
     dateAdded: "2024-02-12",
+    type: "cocktail",
   },
   {
     id: "6",
@@ -133,6 +139,26 @@ export const products: Product[] = [
     ],
     imageUrl: "/placeholder.svg?height=400&width=400",
     dateAdded: "2024-03-01",
+    type: "cocktail",
+  },
+  {
+    id: "7",
+    name: "Patatas Bravas",
+    price: 12.99,
+    shortDescription: "Amado por Martina",
+    description:
+      "Vibrant, refreshing, and unmistakably iconic—Aperol is the perfect balance of bittersweet citrus and herbal elegance. With its striking orange hue and smooth, slightly bitter flavor, this beloved Italian aperitif has been a staple of relaxed afternoons and lively evenings for over a century.",
+    ingredients: ["Aperol", "Champagne", "Sparkling water", "Ice"],
+    recipe: [
+      "Add ice to a wine glass or a large tumbler until it's about ¾ full",
+      "Add ¼ oz of Aperol over the ice.",
+      "Gently pour in 2 ¼ oz of Champagne to keep the bubbles intact.",
+      "Add a splash of sparkling water to taste, giving it a light, refreshing fizz.",
+
+    ],
+    imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Aperol%20Spritz_%20A%20Light%2C%20Citrusy%20Italian%20Cocktail%20-%20The%20Crafted%20Drink-SCsT4IGXeU1gNWeNEjughdPRf0nARk.jpg",
+    dateAdded: "2024-011-15",
+    type: "tapas",
   },
 ]
 
