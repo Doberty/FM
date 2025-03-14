@@ -9,6 +9,7 @@ export type Product = {
     imageUrl: string
     dateAdded: string
     type: 'cocktail' | 'tapas'
+    count: number
   }
   
   

@@ -1,15 +1,17 @@
 "use client"
 
 import { useState } from "react"
-import { products } from "@/lib/data"
 import { ProductCard } from "@/components/product-card"
 import { Header } from "@/components/header"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
+import { ProductProvider, useProducts } from "@/lib/product-context"
+
 type FilterType = "all" | "cocktail" | "tapas"
 
-export default function Home() {
-  const [filter, setFilter] = useState<FilterType>("cocktail")
+function HomePage() {
+  const [filter, setFilter] = useState<FilterType>("all")
+  const { products } = useProducts()
 
   const filteredProducts = filter === "all" ? products : products.filter((product) => product.type === filter)
 
@@ -22,8 +24,8 @@ export default function Home() {
         <div className="max-w-md mx-auto mb-8">
           <Tabs defaultValue="cocktail" className="w-full" onValueChange={(value) => setFilter(value as FilterType)}>
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger className="flex-1" value="cocktail">Cocktails</TabsTrigger>
-              <TabsTrigger className="flex-1" value="tapas">Tapas</TabsTrigger>
+              <TabsTrigger value="cocktail">Cocktails</TabsTrigger>
+              <TabsTrigger value="tapas">Tapas</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
@@ -35,6 +37,14 @@ export default function Home() {
         </div>
       </main>
     </>
+  )
+}
+
+export default function Home() {
+  return (
+    <ProductProvider>
+      <HomePage />
+    </ProductProvider>
   )
 }
 

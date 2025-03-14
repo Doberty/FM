@@ -10,7 +10,8 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import { formatDate } from "@/lib/utils"
-import { CalendarDays } from "lucide-react"
+import { CalendarDays, PlusCircle, RotateCcw } from "lucide-react"
+import { useProducts } from "@/lib/product-context"
 
 interface ProductCardProps {
   product: Product
@@ -18,6 +19,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const { incrementCount, resetCount } = useProducts()
 
   const closeDialog = () => setIsOpen(false)
 
@@ -42,7 +44,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <div className="flex justify-between items-start mb-2">
               <h3 className="font-medium text-lg">{product.name}</h3>
               <Badge variant="outline" className="ml-2">
-                ${product.price.toFixed(2)}
+                Made: {product.count}
               </Badge>
             </div>
             <p className="text-muted-foreground text-sm flex-1">{product.shortDescription}</p>
@@ -75,10 +77,11 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           <Tabs defaultValue="description" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="description">Description</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="description">Info</TabsTrigger>
               <TabsTrigger value="ingredients">Ingredients</TabsTrigger>
               <TabsTrigger value="recipe">Recipe</TabsTrigger>
+              <TabsTrigger value="counter">Counter</TabsTrigger>
             </TabsList>
 
             <TabsContent value="description" className="mt-4">
@@ -110,11 +113,42 @@ export function ProductCard({ product }: ProductCardProps) {
                 ))}
               </div>
             </TabsContent>
+
+            <TabsContent value="counter" className="mt-4">
+              <div className="flex flex-col items-center space-y-6 py-4">
+                <div className="text-center">
+                  <h3 className="text-lg font-medium mb-2">Times Made</h3>
+                  <div className="text-5xl font-bold">{product.count}</div>
+                </div>
+
+                <div className="flex gap-4">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => incrementCount(product.id)}
+                    className="h-12 w-12"
+                  >
+                    <PlusCircle className="h-6 w-6" />
+                    <span className="sr-only">Increment</span>
+                  </Button>
+
+                  <Button variant="outline" size="icon" onClick={() => resetCount(product.id)} className="h-12 w-12">
+                    <RotateCcw className="h-6 w-6" />
+                    <span className="sr-only">Reset</span>
+                  </Button>
+                </div>
+
+                <p className="text-sm text-muted-foreground text-center">
+                  {`Track how many times you've made this {product.type}. Click + to increment or the reset button to
+                  start over.`}
+                </p>
+              </div>
+            </TabsContent>
           </Tabs>
 
           <div className="mt-6 mb-4">
             <Badge variant="secondary" className="w-full flex justify-center py-2 text-lg">
-              ${product.price.toFixed(2)}
+              Made: {product.count} times
             </Badge>
           </div>
 
@@ -130,4 +164,3 @@ export function ProductCard({ product }: ProductCardProps) {
     </>
   )
 }
-

@@ -1,6 +1,22 @@
 import type { Product } from "./types"
 
-export const products: Product[] = [
+export const getProducts = (): Product[] => {
+    // Check if we're in a browser environment
+    if (typeof window !== "undefined") {
+      const savedCounts = localStorage.getItem("productCounts")
+      if (savedCounts) {
+        const counts = JSON.parse(savedCounts)
+        // Update the initial products with saved counts
+        return initialProducts.map((product) => ({
+          ...product,
+          count: counts[product.id] || 0,
+        }))
+      }
+    }
+    return initialProducts
+  }
+
+const initialProducts: Product[] = [
   {
     id: "1",
     name: "Aperol Petit",
@@ -19,6 +35,7 @@ export const products: Product[] = [
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Aperol%20Spritz_%20A%20Light%2C%20Citrusy%20Italian%20Cocktail%20-%20The%20Crafted%20Drink-SCsT4IGXeU1gNWeNEjughdPRf0nARk.jpg",
     dateAdded: "2024-011-15",
     type: "cocktail",
+    count: 0,
   },
   {
     id: "2",
@@ -45,6 +62,7 @@ export const products: Product[] = [
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Aperol%20Coconut%20Margarita%20-%20Join%20Jules-cw7L9a6ge4ncopqFCaS4IzPXEsnNcp.jpg",
     dateAdded: "2025-03-012",
     type: "cocktail",
+    count: 0,
   },
   {
     id: "3",
@@ -74,6 +92,7 @@ export const products: Product[] = [
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Galaxy%20Margarita%20with%20Color%20Changing%20Tequila-lhXXojSM4p3rZIerCs8mq4P8C6fMZC.jpg",
     dateAdded: "2024-12-23",
     type: "cocktail",
+    count: 0,
  },
   {
     id: "4",
@@ -93,6 +112,7 @@ export const products: Product[] = [
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Kit%20Pisco%20Sour-OH0yDtD2jYMXbKYsYI2DBflF59LYbX.jpg",
     dateAdded: "2024-01-05",
     type: "cocktail",
+    count: 0,
   },
   {
     id: "7",
@@ -112,6 +132,7 @@ export const products: Product[] = [
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Patatas%20Bravas-dhhLh3TeB8E1mTaMHqHMRqTwgPiw5l.jpg",
     dateAdded: "2024-011-15",
     type: "tapas",
+    count: 0,
   },
   {
     id: "8",
@@ -131,6 +152,7 @@ export const products: Product[] = [
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Patatas%20Bravas-dhhLh3TeB8E1mTaMHqHMRqTwgPiw5l.jpg",
     dateAdded: "2024-011-15",
     type: "tapas",
+    count: 0,
   },
   {
     id: "9",
@@ -150,6 +172,7 @@ export const products: Product[] = [
     imageUrl: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/Patatas%20Bravas-dhhLh3TeB8E1mTaMHqHMRqTwgPiw5l.jpg",
     dateAdded: "2024-011-15",
     type: "tapas",
+    count: 0,
   },
 ]
 
