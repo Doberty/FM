@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import { formatDate } from "@/lib/utils"
-import { CalendarDays, PlusCircle, RotateCcw } from "lucide-react"
+import { CalendarDays, PlusCircle } from "lucide-react"
 import { useProducts } from "@/lib/product-context"
 
 interface ProductCardProps {
@@ -19,7 +19,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const { incrementCount, resetCount } = useProducts()
+  const { incrementCount } = useProducts()
 
   const closeDialog = () => setIsOpen(false)
 
@@ -33,7 +33,7 @@ export function ProductCard({ product }: ProductCardProps) {
       >
         <Card className="overflow-hidden cursor-pointer h-full flex flex-col" onClick={() => setIsOpen(true)}>
           <div className="relative h-48 w-full">
-            <Image src={product.imageUrl || "/placeholder.svg"} alt={product.name} fill className="object-cover" />
+            <Image src={product.imageUrl || "/placeholder.svg"} alt={product.name} fill className="object-cover rounded-md" />
             <div className="absolute top-2 left-2">
               <Badge variant="secondary" className="capitalize">
                 {product.type}
@@ -131,26 +131,10 @@ export function ProductCard({ product }: ProductCardProps) {
                     <PlusCircle className="h-6 w-6" />
                     <span className="sr-only">Increment</span>
                   </Button>
-
-                  <Button variant="outline" size="icon" onClick={() => resetCount(product.id)} className="h-12 w-12">
-                    <RotateCcw className="h-6 w-6" />
-                    <span className="sr-only">Reset</span>
-                  </Button>
                 </div>
-
-                <p className="text-sm text-muted-foreground text-center">
-                  {`Track how many times you've made this {product.type}. Click + to increment or the reset button to
-                  start over.`}
-                </p>
               </div>
             </TabsContent>
           </Tabs>
-
-          <div className="mt-6 mb-4">
-            <Badge variant="secondary" className="w-full flex justify-center py-2 text-lg">
-              Made: {product.count} times
-            </Badge>
-          </div>
 
           <Button
             variant="outline"
