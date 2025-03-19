@@ -35,6 +35,7 @@ if (process.env.NODE_ENV === "development") {
   // In production, don't use a global variable.
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
+  console.log("Connected to MongoDB");
 }
 
 export default clientPromise;

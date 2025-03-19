@@ -3,18 +3,29 @@ import clientPromise from "@/lib/mongodb"
 
 export async function GET() {
   try {
-    const client = await clientPromise
-    const db = client.db(process.env.MONGODB_DB || "FM")
+    const client = await clientPromise;
+    const db = client.db(process.env.MONGODB_DB || "FM");
 
-    const products = await db.collection("products").find({}).sort({ dateAdded: -1 }).toArray()
+    const products = await db
+      .collection("products")
+      .find({})
+      .toArray();
 
-    return NextResponse.json(products)
+    // Convert ObjectId to string for each product
+    const serializedProducts = products.map(product => ({
+      ...product,
+      _id: product._id.toString(),
+    }));
+
+    return NextResponse.json(serializedProducts);
   } catch (error) {
-    console.error("Error fetching products:", error)
-    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 })
+    console.error("Error fetching products:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch products" },
+      { status: 500 }
+    );
   }
 }
-
 export async function POST(request: Request) {
   try {
     const client = await clientPromise
