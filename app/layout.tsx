@@ -7,8 +7,8 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "F&M Lounge",
-  description: "Discover our signature cocktails and drinks",
+  title: "F&M",
+  description: "Discover our fun relationship with food, drinks, and competitions",
 }
 
 export default function RootLayout({
