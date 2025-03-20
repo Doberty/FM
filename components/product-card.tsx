@@ -1,27 +1,51 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import type { Product } from "@/lib/types"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Image from "next/image"
-import { formatDate } from "@/lib/utils"
-import { CalendarDays, PlusCircle } from "lucide-react"
-import { useProducts } from "@/lib/product-context"
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import type { Product } from "../lib/types";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "../components/ui/dialog";
+import { Card, CardContent } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
+import Image from "next/image";
+import { formatDate } from "../lib/utils";
+import { CalendarDays, PlusCircle, Loader2 } from "lucide-react";
+import { useProducts } from "../lib/product-context";
 
 interface ProductCardProps {
-  product: Product
+  product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const { incrementCount } = useProducts()
+  const [isOpen, setIsOpen] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [incrementLoading, setIncrementLoading] = useState(false);
+  const { incrementCount } = useProducts();
 
-  const closeDialog = () => setIsOpen(false)
+  const closeDialog = () => setIsOpen(false);
+
+  const handleIncrement = async () => {
+    setIsUpdating(true);
+    setIncrementLoading(true);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      incrementCount(product.id);
+    } finally {
+      setIsUpdating(false);
+      setIncrementLoading(false);
+    }
+  };
 
   return (
     <>
@@ -31,9 +55,17 @@ export function ProductCard({ product }: ProductCardProps) {
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
         className="h-full"
       >
-        <Card className="overflow-hidden cursor-pointer h-full flex flex-col" onClick={() => setIsOpen(true)}>
+        <Card
+          className="overflow-hidden cursor-pointer h-full flex flex-col p-0"
+          onClick={() => setIsOpen(true)}
+        >
           <div className="relative h-48 w-full">
-            <Image src={product.imageUrl || "/placeholder.svg"} alt={product.name} fill className="object-cover rounded-md" />
+            <Image
+              src={product.imageUrl || "/placeholder.svg"}
+              alt={product.name}
+              fill
+              className="object-cover !m-0 !p-0"
+            />
             <div className="absolute top-2 left-2">
               <Badge variant="secondary" className="capitalize">
                 {product.type}
@@ -47,7 +79,9 @@ export function ProductCard({ product }: ProductCardProps) {
                 Made: {product.count}
               </Badge>
             </div>
-            <p className="text-muted-foreground text-sm flex-1">{product.shortDescription}</p>
+            <p className="text-muted-foreground text-sm flex-1">
+              {product.shortDescription}
+            </p>
           </CardContent>
         </Card>
       </motion.div>
@@ -55,7 +89,9 @@ export function ProductCard({ product }: ProductCardProps) {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle className="text-xl text-center">{product.name}</DialogTitle>
+            <DialogTitle className="text-xl text-center">
+              {product.name}
+            </DialogTitle>
             <div className="flex items-center justify-center text-sm text-muted-foreground">
               <CalendarDays className="w-4 h-4 mr-2" />
               Added {formatDate(product.dateAdded)}
@@ -85,7 +121,9 @@ export function ProductCard({ product }: ProductCardProps) {
             </TabsList>
 
             <TabsContent value="description" className="mt-4">
-              <p className="text-sm text-muted-foreground leading-relaxed">{product.description}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {product.description}
+              </p>
             </TabsContent>
 
             <TabsContent value="ingredients" className="mt-4">
@@ -106,8 +144,13 @@ export function ProductCard({ product }: ProductCardProps) {
             <TabsContent value="recipe" className="mt-4">
               <div className="space-y-2">
                 {product.recipe.map((step, index) => (
-                  <div key={index} className="flex gap-3 text-sm text-muted-foreground">
-                    <span className="font-medium text-foreground">{index + 1}.</span>
+                  <div
+                    key={index}
+                    className="flex gap-3 text-sm text-muted-foreground"
+                  >
+                    <span className="font-medium text-foreground">
+                      {index + 1}.
+                    </span>
                     <p className="leading-relaxed">{step}</p>
                   </div>
                 ))}
@@ -125,10 +168,15 @@ export function ProductCard({ product }: ProductCardProps) {
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => incrementCount(product.id)}
-                    className="h-12 w-12"
+                    onClick={handleIncrement}
+                    disabled={isUpdating}
+                    className="h-12 w-12 relative"
                   >
-                    <PlusCircle className="h-6 w-6" />
+                    {incrementLoading ? (
+                      <Loader2 className="h-6 w-6 animate-spin" />
+                    ) : (
+                      <PlusCircle className="h-6 w-6" />
+                    )}
                     <span className="sr-only">Increment</span>
                   </Button>
                 </div>
@@ -146,5 +194,5 @@ export function ProductCard({ product }: ProductCardProps) {
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }
