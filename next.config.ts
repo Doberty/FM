@@ -1,9 +1,11 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+module.exports = {
   images: {
-    domains: ["gype7srla1ab70k3.public.blob.vercel-storage.com"],
-  }
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "gype7srla1ab70k3.public.blob.vercel-storage.com",
+        pathname: "/bar/**",
+      },
+    ],
+  },
 };
-
-export default nextConfig;

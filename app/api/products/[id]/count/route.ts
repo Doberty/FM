@@ -45,7 +45,6 @@ export async function PUT(
       .collection("products")
       .findOneAndUpdate(query, updateOperation, { returnDocument: "after" });
 
-    console.log("findOneAndUpdate result:", result);
 
     // Check if the update operation returned a result and a document
     if (!result || !result.value) {
