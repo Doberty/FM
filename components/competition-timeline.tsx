@@ -84,7 +84,9 @@ export function CompetitionTimeline({ competitions }: CompetitionTimelineProps) 
             <p className="text-sm text-muted-foreground">{competition.description}</p>
 
             {competition.participants && (
-              <p className="text-xs text-muted-foreground">{competition.participants} participants</p>
+              <p className="text-xs text-muted-foreground">
+                {competition.participants.length} participants
+              </p>
             )}
 
             <div className="pt-2">

@@ -18,7 +18,6 @@ export default function CupcakeWarsPage() {
       <Header showBackButton={true} title="CUPCAKE WARS" />
       <main className="container mx-auto py-12 px-4">
         <div className="max-w-4xl mx-auto">
-
           <Tabs defaultValue="timeline" className="w-full">
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="timeline" className="flex items-center gap-2">
@@ -106,4 +105,3 @@ export default function CupcakeWarsPage() {
     </>
   )
 }
-

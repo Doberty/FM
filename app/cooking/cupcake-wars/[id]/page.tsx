@@ -5,7 +5,11 @@ import { Header } from "../../../../components/header"
 import { Button } from "../../../../components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../../../../components/ui/card"
 import { cupcakeCompetitions } from "../../../../lib/wars-data"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Calendar, Users, Trophy, Clock } from "lucide-react"
+import { ParticipantCard } from "../../../../components/participant-card"
+import { RulesSection } from "../../../../components/rules-section"
+import { Badge } from "../../../../components/ui/badge"
+import { cn } from "../../../../lib/utils"
 import React from "react"
 
 export default function CompetitionDetailPage() {
@@ -34,37 +38,131 @@ export default function CompetitionDetailPage() {
     )
   }
 
+  // Calculate total votes for percentage calculation
+  const totalVotes = competition.participants?.reduce((sum, p) => sum + p.votes, 0) || 0
+
+  // Find champion if exists
+  const champion = competition.participants?.find((p) => p.isChampion)
+
   return (
     <>
       <Header showBackButton={true} title={competition.title.toUpperCase()} />
       <main className="container mx-auto py-12 px-4">
-        <Card className="max-w-4xl mx-auto">
-          <CardHeader>
-            <CardTitle className="text-2xl">{competition.title}</CardTitle>
-            <CardDescription>
-              {new Date(competition.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="mb-6">{competition.description}</p>
+        <div className="max-w-5xl mx-auto">
+          {/* Competition Overview */}
+          <Card className="mb-8">
+            <CardHeader>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                <div>
+                  <CardTitle className="text-2xl">{competition.title}</CardTitle>
+                  <CardDescription className="mt-2">{competition.description}</CardDescription>
+                </div>
+                <Badge
+                  className={cn(
+                    "text-sm py-1 px-3",
+                    competition.status === "upcoming"
+                      ? "bg-secondary text-secondary-foreground"
+                      : competition.status === "ongoing"
+                        ? "bg-blue-100 text-blue-700 border-blue-200"
+                        : "bg-green-100 text-green-700 border-green-200",
+                  )}
+                >
+                  {competition.status === "upcoming"
+                    ? "Upcoming"
+                    : competition.status === "ongoing"
+                      ? "Ongoing"
+                      : "Completed"}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div className="flex items-center gap-3">
+                  <Calendar className="h-5 w-5 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">Date</p>
+                    <p className="text-sm text-muted-foreground">
+                      {new Date(competition.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                  </div>
+                </div>
 
-            <div className="p-8 text-center bg-secondary rounded-md">
-              <h2 className="text-xl font-medium mb-4">Competition Details</h2>
-              <p>This page is under development. Check back soon for full competition details!</p>
-            </div>
+                {competition.totalParticipants && (
+                  <div className="flex items-center gap-3">
+                    <Users className="h-5 w-5 text-muted-foreground" />
+                    <div>
+                      <p className="text-sm font-medium">Participants</p>
+                      <p className="text-sm text-muted-foreground">{competition.totalParticipants} total</p>
+                    </div>
+                  </div>
+                )}
 
-            <div className="mt-6 flex justify-center">
-              <Button onClick={() => router.push("/cooking/cupcake-wars")}>
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Cupcake Wars
-              </Button>
+                {competition.status === "completed" && champion && (
+                  <div className="flex items-center gap-3">
+                    <Trophy className="h-5 w-5 text-amber-500" />
+                    <div>
+                      <p className="text-sm font-medium">Champion</p>
+                      <p className="text-sm text-muted-foreground">{champion.name}</p>
+                    </div>
+                  </div>
+                )}
+
+                {competition.status === "ongoing" && (
+                  <div className="flex items-center gap-3">
+                    <Clock className="h-5 w-5 text-blue-500" />
+                    <div>
+                      <p className="text-sm font-medium">Voting</p>
+                      <p className="text-sm text-muted-foreground">In progress</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+
+          {competition.participants && competition.participants.length > 0 && (
+                <div className="mb-8">
+                    <h2 className="text-xl font-semibold mb-6">
+                    {competition.status === "completed" ? "Final Results" : "Current Standings"}
+                    </h2>
+
+                    <div
+                    className={`grid gap-6 ${
+                        competition.participants.length === 1
+                        ? "grid-cols-1"
+                        : competition.participants.length === 2
+                        ? "grid-cols-1 sm:grid-cols-2"
+                        : competition.participants.length === 3
+                        ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+                        : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+                    }`}
+                    >
+                    {competition.participants.map((participant) => (
+                        <ParticipantCard key={participant.id} participant={participant} totalVotes={totalVotes} />
+                    ))}
+                    </div>
+                </div>
+                )}
+
+
+          {/* Rules Section */}
+          {competition.rules && competition.rules.length > 0 && (
+            <div className="mb-8">
+              <RulesSection rules={competition.rules} />
             </div>
-          </CardContent>
-        </Card>
+          )}
+
+          <div className="flex justify-center">
+            <Button onClick={() => router.push("/cooking/cupcake-wars")}>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Cupcake Wars
+            </Button>
+          </div>
+        </div>
       </main>
     </>
   )
