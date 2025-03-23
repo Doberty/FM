@@ -1,9 +1,8 @@
-import type { Participant } from "../lib/wars-data"
-import { Card, CardContent } from "../components/ui/card"
+import type { Participant } from "@/lib/wars-data"
+import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import { Trophy } from "lucide-react"
-import { cn } from "../lib/utils"
-import React from "react"
+import { cn } from "@/lib/utils"
 
 interface ParticipantCardProps {
   participant: Participant
@@ -22,9 +21,10 @@ export function ParticipantCard({ participant, totalVotes }: ParticipantCardProp
       )}
     >
       <div className="relative">
-        <div className="relative h-64 w-full">
+        {/* Cupcake Image */}
+        <div className="relative h-64 w-full ">
           <Image
-            src={participant.image || "/placeholder.svg"}
+            src={participant.cupcake || "/placeholder.svg"}
             alt={participant.cupcakeTitle}
             fill
             className="object-cover"
@@ -37,9 +37,14 @@ export function ParticipantCard({ participant, totalVotes }: ParticipantCardProp
             <span className="font-medium text-sm">Champion</span>
           </div>
         )}
+
+        {/* Participant Profile Image */}
+        <div className="absolute -bottom-8 left-4 h-16 w-16 rounded-full border-4 border-white shadow-md overflow-hidden">
+          <Image src={participant.image || "/placeholder.svg"} alt={participant.name} fill className="object-cover" />
+        </div>
       </div>
 
-      <CardContent className="p-6">
+      <CardContent className="p-6 pt-10">
         <div className="mb-4">
           <h3 className="text-xl font-medium mb-1">{participant.cupcakeTitle}</h3>
           <p className="text-sm text-muted-foreground">by {participant.name}</p>

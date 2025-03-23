@@ -5,6 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../../components/ui
 import { CalendarDays, Trophy, Clock } from "lucide-react"
 import { CompetitionTimeline } from "../../../components/competition-timeline"
 import { cupcakeCompetitions } from "../../../lib/wars-data"
+import { LeaderboardSection } from "../../../components/leaderboard-section"
 import React from "react"
 
 export default function CupcakeWarsPage() {
@@ -91,8 +92,16 @@ export default function CupcakeWarsPage() {
                   <CardDescription>Review the results of our past competitions</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {completedCompetitions.length > 0 ? (
-                    <CompetitionTimeline competitions={completedCompetitions} />
+                {completedCompetitions.length > 0 ? (
+                    <>
+                      <Card className="mb-8 border-dashed border-amber-200">
+                        <CardContent className="pt-6">
+                          <LeaderboardSection />
+                        </CardContent>
+                      </Card>
+
+                      <CompetitionTimeline competitions={completedCompetitions} />
+                    </>
                   ) : (
                     <p className="text-center text-muted-foreground py-8">No completed competitions to show.</p>
                   )}
