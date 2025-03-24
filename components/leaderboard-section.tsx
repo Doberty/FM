@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Trophy } from "lucide-react"
-import { cupcakeCompetitions } from "../lib/wars-data"
-import React from "react"
+import { cupcakeCompetitions } from "@/lib/wars-data"
+import { getParticipantById } from "@/lib/participants"
 
 // Define the structure for a winner in our leaderboard
 interface LeaderboardWinner {
@@ -109,23 +109,27 @@ function calculateTopWinners(): LeaderboardWinner[] {
 
   // Go through each competition and count wins
   completedCompetitions.forEach((competition) => {
-    if (competition.participants) {
-      const champion = competition.participants.find((p) => p.isChampion)
+    if (competition.entries) {
+      const champion = competition.entries.find((entry) => entry.isChampion)
 
       if (champion) {
-        if (winnerMap.has(champion.id)) {
-          // Increment wins for existing winner
-          const existingWinner = winnerMap.get(champion.id)!
-          existingWinner.wins += 1
-          winnerMap.set(champion.id, existingWinner)
-        } else {
-          // Add new winner
-          winnerMap.set(champion.id, {
-            id: champion.id,
-            name: champion.name,
-            image: champion.image,
-            wins: 1,
-          })
+        const participant = getParticipantById(champion.participantId)
+
+        if (participant) {
+          if (winnerMap.has(participant.id)) {
+            // Increment wins for existing winner
+            const existingWinner = winnerMap.get(participant.id)!
+            existingWinner.wins += 1
+            winnerMap.set(participant.id, existingWinner)
+          } else {
+            // Add new winner
+            winnerMap.set(participant.id, {
+              id: participant.id,
+              name: participant.name,
+              image: participant.image,
+              wins: 1,
+            })
+          }
         }
       }
     }

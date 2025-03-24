@@ -1,12 +1,10 @@
 export type CompetitionStatus = "upcoming" | "ongoing" | "completed"
 
-export interface Participant {
-  id: string
-  name: string
+export interface CupcakeEntry {
+  participantId: string
   cupcakeTitle: string
   description: string
-  cupcake: string
-  image: string
+  cupcakeImage: string
   votes: number
   isChampion?: boolean
 }
@@ -25,86 +23,106 @@ export interface CupcakeCompetition {
   isSpecial: boolean
   specialTheme?: string
   image?: string
-  participants?: Participant[]
+  entries?: CupcakeEntry[]
   rules?: CompetitionRule[]
   totalParticipants?: number
 }
 
 export const cupcakeCompetitions: CupcakeCompetition[] = [
   {
-    id: "First-fiesta",
+    id: "first-fiesta",
     title: "First Fiesta",
-    date: "2025-03-29",
-    description: "Fist ever cupcake war, no rules, no mercy and no quarter.",
+    date: "2025-03-28",
+    description: "First ever cupcake war at F&M. No rules, no mercy, just cupcakes.",
     status: "ongoing",
-    isSpecial: false,
+    isSpecial: true,
+    specialTheme: "First Edition",
     image: "/placeholder.svg?height=300&width=300",
     totalParticipants: 2,
-    participants: [
+    entries: [
       {
-        id: "p1",
-        name: "Francisco Doberti",
+        participantId: "martina-roessler",
         cupcakeTitle: "TBD",
-        description: "TBD",
-        cupcake: "/placeholder.svg?height=400&width=400",
-        image: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/participants/IMG_0124-J1yBf0OoZFkZiOZ1ViquTmqAZqEClK.jpg",
+        description:
+          "TBD",
+        cupcakeImage: "/placeholder.svg?height=400&width=400",
         votes: 0,
         isChampion: false,
       },
       {
-        id: "p2",
-        name: "Martina Roessler",
-        cupcakeTitle: "TBD",
+        participantId: "francisco-doberti",
+        cupcakeTitle: "TBD ",
         description:
-          "TDB",
-        cupcake: "/placeholder.svg?height=400&width=400",
-        image: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/participants/e5d6a8da-f2f6-4ff9-b5fa-dd570172ee38-aPJcno4dJYplX0Y5KrjsLEE1RKveks.JPG",
+          "TBD",
+        cupcakeImage: "/placeholder.svg?height=400&width=400",
         votes: 0,
-        isChampion: false,
       },
     ],
     rules: [
       {
-        title: "Against The red",
+        title: "Against the red",
         description: "No red velvet cupcakes allowed.",
       },
       {
         title: "In house cooking",
-        description: "All cupcakes must be baked in the house.",
+        description: "All cupcakes must be baked in the F&M kitchen.",
       },
       {
-        title: "Creative Presentation",
-        description: "Cupcakes will be judged on creativity and presentation.",
+        title: "Presentation",
+        description: "Cupcakes will be judged on appearance, creativity, and execution.",
       },
     ],
   },
   {
-    id: "christmas-sweet-2025",
-    title: "Christmas Sweet",
-    date: "2025-12-20",
-    description: "Christmas special with festive cupcakes, traditional flavors, and holiday decorations.",
+    id: "6-months-anniversary",
+    title: "6 Months Anniversary",
+    date: "2025-06-23",
+    description:
+      "Celebrate the 6-month anniversary of F&M with a special cupcake war. Participants must create a cupcake that represents the spirit of F&M.",
     status: "upcoming",
     isSpecial: true,
-    specialTheme: "Christmas",
+    specialTheme: "Anniversary Edition",
     image: "/placeholder.svg?height=300&width=300",
+    totalParticipants: 2,
+    entries: [
+      {
+        participantId: "martina-roessler",
+        cupcakeTitle: "TBD",
+        description:
+          "TBD",
+        cupcakeImage: "/placeholder.svg?height=400&width=400",
+        votes: 0,
+        isChampion: false,
+      },
+      {
+        participantId: "francisco-doberti",
+        cupcakeTitle: "TBD ",
+        description:
+          "TBD",
+        cupcakeImage: "/placeholder.svg?height=400&width=400",
+        votes: 0,
+      },
+    ],
     rules: [
       {
-        title: "Christmas Theme",
-        description: "Cupcakes must visually represent Christmas themes.",
-      },
-      {
-        title: "Traditional Flavors",
-        description: "At least one traditional Christmas flavor must be incorporated.",
-      },
-      {
-        title: "Festive Decoration",
-        description: "Decorations should celebrate the holiday season.",
+        title: "F&M Spirit",
+        description: "Cupcakes must represent the spirit of F&M.",
       },
       {
         title: "Technique Showcase",
-        description: "At least one advanced decorating technique should be demonstrated.",
+        description:
+          "Participants should demonstrate at least one advanced chocolate technique (tempering, ganache, etc.).",
+      },
+      {
+        title: "Presentation",
+        description: "Cupcakes will be judged on appearance, creativity, and execution.",
       },
     ],
   },
+  
 ]
+
+export function getCompetitionById(id: string): CupcakeCompetition | undefined {
+  return cupcakeCompetitions.find((competition) => competition.id === id)
+}
 

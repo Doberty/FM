@@ -4,8 +4,9 @@ import { useParams, useRouter } from "next/navigation"
 import { Header } from "../../../../components/header"
 import { Button } from "../../../../components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../../../../components/ui/card"
-import { cupcakeCompetitions } from "../../../../lib/wars-data"
-import { ArrowLeft, Calendar, Users, Trophy, Clock } from "lucide-react"
+import { getCompetitionById } from "@/lib/wars-data"
+import { getParticipantById } from "@/lib/participants"
+import { ArrowLeft, Calendar, Users, Trophy } from "lucide-react"
 import { ParticipantCard } from "../../../../components/participant-card"
 import { RulesSection } from "../../../../components/rules-section"
 import { Badge } from "../../../../components/ui/badge"
@@ -17,7 +18,7 @@ export default function CompetitionDetailPage() {
   const router = useRouter()
   const id = params.id as string
 
-  const competition = cupcakeCompetitions.find((comp) => comp.id === id)
+  const competition = getCompetitionById(id)
 
   if (!competition) {
     return (
@@ -39,10 +40,10 @@ export default function CompetitionDetailPage() {
   }
 
   // Calculate total votes for percentage calculation
-  const totalVotes = competition.participants?.reduce((sum, p) => sum + p.votes, 0) || 0
+  const totalVotes = competition.entries?.reduce((sum, entry) => sum + entry.votes, 0) || 0
 
   // Find champion if exists
-  const champion = competition.participants?.find((p) => p.isChampion)
+  const champion = competition.entries?.find((entry) => entry.isChampion)
 
   return (
     <>
@@ -106,17 +107,9 @@ export default function CompetitionDetailPage() {
                     <Trophy className="h-5 w-5 text-amber-500" />
                     <div>
                       <p className="text-sm font-medium">Champion</p>
-                      <p className="text-sm text-muted-foreground">{champion.name}</p>
-                    </div>
-                  </div>
-                )}
-
-                {competition.status === "ongoing" && (
-                  <div className="flex items-center gap-3">
-                    <Clock className="h-5 w-5 text-blue-500" />
-                    <div>
-                      <p className="text-sm font-medium">Voting</p>
-                      <p className="text-sm text-muted-foreground">In progress</p>
+                      <p className="text-sm text-muted-foreground">
+                        {getParticipantById(champion.participantId)?.name}
+                      </p>
                     </div>
                   </div>
                 )}
@@ -124,29 +117,33 @@ export default function CompetitionDetailPage() {
             </CardContent>
           </Card>
 
-          {competition.participants && competition.participants.length > 0 && (
-                <div className="mb-8">
-                    <h2 className="text-xl font-semibold mb-6">
-                    {competition.status === "completed" ? "Final Results" : "Current Standings"}
-                    </h2>
+          {/* Participants Section */}
+          {competition.entries && competition.entries.length > 0 && (
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold mb-6">
+                {competition.status === "completed" ? "Final Results" : "Current Standings"}
+              </h2>
+              <div
+                className={`grid gap-6 ${
+                  competition.entries.length === 2
+                    ? 'grid-cols-1 md:grid-cols-2'
+                    : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                }`}
+              >
+                {competition.entries.map((entry, index) => (
+                  <ParticipantCard
+                    key={entry.participantId}
+                    entry={entry}
+                    totalVotes={totalVotes}
+                    competitionId={competition.id}
+                    competitionStatus={competition.status}
+                    participantIndex={index}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
 
-                    <div
-                    className={`grid gap-6 ${
-                        competition.participants.length === 1
-                        ? "grid-cols-1"
-                        : competition.participants.length === 2
-                        ? "grid-cols-1 sm:grid-cols-2"
-                        : competition.participants.length === 3
-                        ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
-                        : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-                    }`}
-                    >
-                    {competition.participants.map((participant) => (
-                        <ParticipantCard key={participant.id} participant={participant} totalVotes={totalVotes} />
-                    ))}
-                    </div>
-                </div>
-                )}
 
 
           {/* Rules Section */}
@@ -167,4 +164,5 @@ export default function CompetitionDetailPage() {
     </>
   )
 }
+
 

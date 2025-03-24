@@ -1,11 +1,10 @@
 "use client"
 
-import type { CupcakeCompetition } from "../lib/wars-data"
-import { Badge } from "../components/ui/badge"
+import type { CupcakeCompetition } from "@/lib/wars-data"
+import { Badge } from "@/components/ui/badge"
 import { CalendarIcon, Trophy, Clock, Star, ChevronRight } from "lucide-react"
-import { cn } from "../lib/utils"
+import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
-import React from "react"
 
 interface CompetitionTimelineProps {
   competitions: CupcakeCompetition[]
@@ -57,7 +56,7 @@ export function CompetitionTimeline({ competitions }: CompetitionTimelineProps) 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <h3 className="text-lg font-medium">{competition.title}</h3>
-                {competition.isSpecial && (
+                {competition.isSpecial && competition.specialTheme && (
                   <Badge
                     variant="outline"
                     className="bg-amber-50 text-amber-700 border-amber-200 flex items-center gap-1"
@@ -83,10 +82,8 @@ export function CompetitionTimeline({ competitions }: CompetitionTimelineProps) 
 
             <p className="text-sm text-muted-foreground">{competition.description}</p>
 
-            {competition.participants && (
-              <p className="text-xs text-muted-foreground">
-                {competition.participants.length} participants
-              </p>
+            {competition.totalParticipants !== undefined && (
+              <p className="text-xs text-muted-foreground">{competition.totalParticipants} participants</p>
             )}
 
             <div className="pt-2">
