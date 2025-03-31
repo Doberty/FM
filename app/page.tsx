@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { menuItems } from "@/lib/menuItems";
+import { BarChart3 } from "lucide-react";
 
 export default function MenuPage() {
   const router = useRouter();
@@ -49,6 +50,24 @@ export default function MenuPage() {
                   </Button>
                 </CardContent>
               </Card>
+
+              <Card className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border-dashed border-2">
+              <CardContent className="p-6 flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="bg-primary/10 p-3 rounded-full mr-4">
+                    <BarChart3 className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-lg">Activity Statistics</h3>
+                    <p className="text-sm text-muted-foreground">Track your activities and progress</p>
+                  </div>
+                </div>
+                <Button variant="ghost" size="sm" className="ml-4">
+                  View Stats
+                </Button>
+              </CardContent>
+            </Card>
+
             </motion.div>
           ))}
         </div>
