@@ -20,7 +20,7 @@ export default function MenuPage() {
         <p className="text-muted-foreground mt-2">Select your experience</p>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center p-4">
+      <main className="flex-1 flex flex-col items-center justify-center p-4 w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
           {menuItems.map((item) => (
             <motion.div
@@ -50,26 +50,34 @@ export default function MenuPage() {
                   </Button>
                 </CardContent>
               </Card>
-
-              <Card className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border-dashed border-2">
-              <CardContent className="p-6 flex items-center justify-between">
-                <div className="flex items-center">
+            </motion.div>
+          ))}
+        </div>
+        
+        <div className="mt-8 max-w-5xl w-full">
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => router.push("/statistics")}
+            className="cursor-pointer w-full"
+          >
+            <Card className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border-dashed border-2 w-full">
+              <CardContent className="p-6 flex flex-col items-start w-full">
+                <div className="flex items-center w-full">
                   <div className="bg-primary/10 p-3 rounded-full mr-4">
                     <BarChart3 className="h-6 w-6 text-primary" />
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <h3 className="font-medium text-lg">Activity Statistics</h3>
                     <p className="text-sm text-muted-foreground">Track your activities and progress</p>
                   </div>
                 </div>
-                <Button variant="ghost" size="sm" className="ml-4">
+                <Button variant="ghost" size="lg" className="w-full mt-4">
                   View Stats
                 </Button>
               </CardContent>
             </Card>
-
-            </motion.div>
-          ))}
+          </motion.div>
         </div>
       </main>
 
@@ -77,5 +85,5 @@ export default function MenuPage() {
         <p>© {new Date().getFullYear()} F&M. All rights reserved.</p>
       </footer>
     </div>
-  )
+  );
 }

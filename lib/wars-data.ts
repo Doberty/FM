@@ -119,6 +119,51 @@ export const cupcakeCompetitions: CupcakeCompetition[] = [
       },
     ],
   },
+  {
+    id: "completed",
+    title: "Test Completion",
+    date: "2023-06-23",
+    description:
+      "Celebrate the 6-month anniversary of F&M with a special cupcake war. Participants must create a cupcake that represents the spirit of F&M.",
+    status: "completed",
+    isSpecial: false,
+    image: "/placeholder.svg?height=300&width=300",
+    totalParticipants: 2,
+    entries: [
+      {
+        participantId: "martina-roessler",
+        cupcakeTitle: "TBD",
+        description:
+          "TBD",
+        cupcakeImage: "/placeholder.svg?height=400&width=400",
+        votes: 10,
+        isChampion: true,
+      },
+      {
+        participantId: "francisco-doberti",
+        cupcakeTitle: "TBD ",
+        description:
+          "TBD",
+        cupcakeImage: "/placeholder.svg?height=400&width=400",
+        votes: 5,
+      },
+    ],
+    rules: [
+      {
+        title: "F&M Spirit",
+        description: "Cupcakes must represent the spirit of F&M.",
+      },
+      {
+        title: "Technique Showcase",
+        description:
+          "Participants should demonstrate at least one advanced chocolate technique (tempering, ganache, etc.).",
+      },
+      {
+        title: "Presentation",
+        description: "Cupcakes will be judged on appearance, creativity, and execution.",
+      },
+    ],
+  },
   
 ]
 
