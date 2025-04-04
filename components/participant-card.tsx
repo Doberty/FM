@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import type { CupcakeEntry } from "@/lib/wars-data"
+import type { CompetitionEntry } from "@/lib/wars-data"
 import { getParticipantById } from "@/lib/participants"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
 import { ParticipantProfile } from "../components/participant-profile"
 
 interface ParticipantCardProps {
-  entry: CupcakeEntry
+  entry: CompetitionEntry
   totalVotes: number
   competitionId: string
   competitionStatus: "upcoming" | "ongoing" | "completed"
@@ -46,8 +46,8 @@ export function ParticipantCard({
           {/* Cupcake Image */}
           <div className="relative h-64 w-full">
             <Image
-              src={entry.cupcakeImage || "/placeholder.svg"}
-              alt={entry.cupcakeTitle}
+              src={entry.dishImage || "/placeholder.svg"}
+              alt={entry.dishTitle}
               fill
               className="object-cover"
             />
@@ -71,10 +71,10 @@ export function ParticipantCard({
 
         <CardContent className="p-6 pt-10">
           <div className="mb-4">
-            <h3 className="text-xl font-medium mb-1">{entry.cupcakeTitle}</h3>
+            <h3 className="text-xl font-medium mb-1">{entry.dishTitle}</h3>
             <div className="flex items-center justify-between">
               <p className="text-sm text-muted-foreground">by {participant.name}</p>
-              <Button variant="ghost" size="sm" className="h-8 px-2 text-xs" onClick={() => setShowProfile(true)}>
+              <Button variant="default" size="sm"  className="h-8 px-2 text-xs" onClick={() => setShowProfile(true)}>
                 <User className="h-3 w-3 mr-1" />
                 Profile
               </Button>

@@ -4,15 +4,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../..
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../../components/ui/tabs"
 import { CalendarDays, Trophy, Clock } from "lucide-react"
 import { CompetitionTimeline } from "../../../components/competition-timeline"
-import { cupcakeCompetitions } from "../../../lib/wars-data"
+import { competitions } from "../../../lib/wars-data"
 import { LeaderboardSection } from "../../../components/leaderboard-section"
 import React from "react"
 
 export default function CupcakeWarsPage() {
-  const upcomingCompetitions = cupcakeCompetitions.filter((comp) => comp.status === "upcoming")
-  const ongoingCompetitions = cupcakeCompetitions.filter((comp) => comp.status === "ongoing")
-  const completedCompetitions = cupcakeCompetitions.filter((comp) => comp.status === "completed")
+  const cupcakeWarsCompetitions = competitions.filter((comp) => comp.type === "cupcake-wars")
 
+  const upcomingCompetitions = cupcakeWarsCompetitions.filter((comp) => comp.status === "upcoming")
+  const ongoingCompetitions = cupcakeWarsCompetitions.filter((comp) => comp.status === "ongoing")
+  const completedCompetitions = cupcakeWarsCompetitions.filter((comp) => comp.status === "completed")
 
   return (
     <>
@@ -46,7 +47,7 @@ export default function CupcakeWarsPage() {
                   <CardDescription>All our past, present, and future competitions</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <CompetitionTimeline competitions={cupcakeCompetitions} />
+                  <CompetitionTimeline competitions={cupcakeWarsCompetitions} />
                 </CardContent>
               </Card>
             </TabsContent>

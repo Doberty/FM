@@ -72,7 +72,7 @@ export default function MenuPage() {
                     <p className="text-sm text-muted-foreground">Track your activities and progress</p>
                   </div>
                 </div>
-                <Button variant="ghost" size="lg" className="w-full mt-4">
+                <Button variant="default" size="sm" className="w-full mt-4">
                   View Stats
                 </Button>
               </CardContent>

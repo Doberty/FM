@@ -1,13 +1,13 @@
 "use client"
 
-import type { CupcakeCompetition } from "@/lib/wars-data"
+import type { Competition } from "@/lib/wars-data"
 import { Badge } from "@/components/ui/badge"
 import { CalendarIcon, Trophy, Clock, Star, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 
 interface CompetitionTimelineProps {
-  competitions: CupcakeCompetition[]
+  competitions: Competition[]
 }
 
 export function CompetitionTimeline({ competitions }: CompetitionTimelineProps) {
@@ -16,7 +16,7 @@ export function CompetitionTimeline({ competitions }: CompetitionTimelineProps) 
   // Sort competitions by date
   const sortedCompetitions = [...competitions].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
-  const handleCompetitionClick = (competition: CupcakeCompetition) => {
+  const handleCompetitionClick = (competition: Competition) => {
     if (competition.status === "upcoming") return
     router.push(`/cooking/cupcake-wars/${competition.id}`)
   }

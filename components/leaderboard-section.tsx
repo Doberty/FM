@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { Trophy } from "lucide-react"
-import { cupcakeCompetitions } from "@/lib/wars-data"
+import { competitions } from "@/lib/wars-data"
 import { getParticipantById } from "@/lib/participants"
 
 // Define the structure for a winner in our leaderboard
@@ -102,7 +102,7 @@ export function LeaderboardSection() {
 // Helper function to calculate the top winners
 function calculateTopWinners(): LeaderboardWinner[] {
   // Get all completed competitions
-  const completedCompetitions = cupcakeCompetitions.filter((comp) => comp.status === "completed")
+  const completedCompetitions = competitions.filter((comp) => comp.status === "completed")
 
   // Create a map to track winners and their win counts
   const winnerMap = new Map<string, LeaderboardWinner>()
