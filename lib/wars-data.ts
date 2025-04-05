@@ -39,7 +39,7 @@ export const competitions: Competition[] = [
     id: "first-fiesta",
     title: "First Fiesta",
     type: "cupcake-wars",
-    date: "2025-03-28",
+    date: "2025-04-06",
     description: "First ever cupcake war at F&M. No rules, no mercy, just cupcakes.",
     status: "ongoing",
     isSpecial: true,
@@ -49,18 +49,18 @@ export const competitions: Competition[] = [
     entries: [
       {
         participantId: "martina-roessler",
-        dishTitle: "TBD",
+        dishTitle: "Berrylicious Bliss",
         description:
-          "TBD",
+          "A luscious vanilla cupcake base, light and fluffy, crowned with a decadent swirl of cream cheese frosting blended with rich white chocolate and tangy cheesecake filling. Finished with a vibrant raspberry on top, this treat strikes the perfect balance between sweet and tart — a dreamy indulgence in every bite.",
         dishImage: "/placeholder.svg?height=400&width=400",
         votes: 0,
         isChampion: false,
       },
       {
         participantId: "francisco-doberti",
-        dishTitle: "TBD ",
+        dishTitle: "Nuts for You",
         description:
-          "TBD",
+          "A deep, cocoa-kissed cupcake with an irresistibly moist crumb, cloaked in a silky cream cheese frosting and drizzled with golden salted caramel. Crowned with a toasted hazelnut, this decadent creation smolders with sweet intensity and a hint of bold elegance — a bite of twilight temptation.",
         dishImage: "/placeholder.svg?height=400&width=400",
         votes: 0,
       },
@@ -109,52 +109,6 @@ export const competitions: Competition[] = [
           "TBD",
         dishImage: "/placeholder.svg?height=400&width=400",
         votes: 0,
-      },
-    ],
-    rules: [
-      {
-        title: "F&M Spirit",
-        description: "Cupcakes must represent the spirit of F&M.",
-      },
-      {
-        title: "Technique Showcase",
-        description:
-          "Participants should demonstrate at least one advanced chocolate technique (tempering, ganache, etc.).",
-      },
-      {
-        title: "Presentation",
-        description: "Cupcakes will be judged on appearance, creativity, and execution.",
-      },
-    ],
-  },
-  {
-    id: "completed",
-    title: "Test Completion",
-    type: "cupcake-wars",
-    date: "2023-06-23",
-    description:
-      "Celebrate the 6-month anniversary of F&M with a special cupcake war. Participants must create a cupcake that represents the spirit of F&M.",
-    status: "completed",
-    isSpecial: false,
-    image: "/placeholder.svg?height=300&width=300",
-    totalParticipants: 2,
-    entries: [
-      {
-        participantId: "martina-roessler",
-        dishTitle: "TBD",
-        description:
-          "TBD",
-        dishImage: "/placeholder.svg?height=400&width=400",
-        votes: 10,
-        isChampion: true,
-      },
-      {
-        participantId: "francisco-doberti",
-        dishTitle: "TBD ",
-        description:
-          "TBD",
-        dishImage: "/placeholder.svg?height=400&width=400",
-        votes: 5,
       },
     ],
     rules: [
