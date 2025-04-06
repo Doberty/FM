@@ -11,7 +11,9 @@ import { ParticipantCard } from "../../../../components/participant-card"
 import { RulesSection } from "../../../../components/rules-section"
 import { Badge } from "../../../../components/ui/badge"
 import { cn } from "../../../../lib/utils"
+import { WarGallery } from "../../../../components/war-gallery"
 import React from "react"
+
 
 export default function CompetitionDetailPage() {
   const params = useParams()
@@ -143,6 +145,11 @@ export default function CompetitionDetailPage() {
               </div>
             </div>
           )}
+
+          {/* War Gallery - New Component */}
+          <div className="mb-8">
+            <WarGallery warId={id} />
+          </div>
 
 
 

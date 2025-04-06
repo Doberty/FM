@@ -6,6 +6,7 @@ import { CalendarDays, Trophy, Clock } from "lucide-react"
 import { CompetitionTimeline } from "../../../components/competition-timeline"
 import { competitions } from "../../../lib/wars-data"
 import { LeaderboardSection } from "../../../components/leaderboard-section"
+
 import React from "react"
 
 export default function CupcakeWarsPage() {
