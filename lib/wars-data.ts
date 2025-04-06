@@ -53,7 +53,7 @@ export const competitions: Competition[] = [
         description:
           "A luscious vanilla cupcake base, light and fluffy, crowned with a decadent swirl of cream cheese frosting blended with rich white chocolate and tangy cheesecake filling. Finished with a vibrant raspberry on top, this treat strikes the perfect balance between sweet and tart — a dreamy indulgence in every bite.",
         dishImage: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/cheesecake%20raspberry-z4tqU4vpXK0nv1XJmZuIL4bvKCsjKE.jpeg",
-        votes: 8,
+        votes: 10,
         isChampion: false,
       },
       {
@@ -62,8 +62,8 @@ export const competitions: Competition[] = [
         description:
           "A deep, cocoa-kissed cupcake with an irresistibly moist crumb, cloaked in a silky cream cheese frosting and drizzled with golden salted caramel. Crowned with a toasted hazelnut, this decadent creation smolders with sweet intensity and a hint of bold elegance — a bite of twilight temptation.",
         dishImage: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/saltedcaramel-JsLTpW1hs7eSdL5Z1D1JdBHTrZJ7ML.jpeg",
-        votes: 7,
-        isChampion: false,
+        votes: 11,
+        isChampion: true,
       },
     ],
     rules: [
