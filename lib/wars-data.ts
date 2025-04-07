@@ -89,8 +89,7 @@ export const competitions: Competition[] = [
     description:
       "Celebrate the 6-month anniversary of F&M with a special cupcake war. Participants must create a cupcake that represents the spirit of F&M.",
     status: "upcoming",
-    isSpecial: true,
-    specialTheme: "Anniversary Edition",
+    isSpecial: false,
     image: "/placeholder.svg?height=300&width=300",
     totalParticipants: 2,
     entries: [
@@ -130,8 +129,8 @@ export const competitions: Competition[] = [
   },
   {
     id: "mystery-box-challenge-1",
-    title: "Mystery Box Challenge: Seasonal Ingredients",
-    date: "2025-05-19",
+    title: "Mystery Box",
+    date: "2025-07-19",
     description:
       "Contestants must create a gourmet dish using only the surprise ingredients revealed in their mystery box.",
     status: "upcoming",
@@ -142,7 +141,7 @@ export const competitions: Competition[] = [
     ingredients: ["duck breast", "blackberries", "fennel", "star anise", "sweet potatoes", "dark chocolate"],
     entries: [
       {
-        participantId: "martina-roesller",
+        participantId: "martina-roessler",
         dishTitle: "Pan-Seared Duck with Blackberry Reduction",
         description:
           "Duck breast seared to perfection, served with a blackberry and star anise reduction, fennel puree, and sweet potato crisps.",
@@ -158,16 +157,7 @@ export const competitions: Competition[] = [
         dishImage: "/placeholder.svg?height=400&width=400",
         score: 88,
         votes: 0,
-      },
-      {
-        participantId: "alex-chen",
-        dishTitle: "Spiced Duck and Berry Compote",
-        description:
-          "Five-spice duck breast with a blackberry compote, roasted fennel, and sweet potato mash with star anise infusion.",
-        dishImage: "/placeholder.svg?height=400&width=400",
-        score: 85,
-        votes: 0,
-      },
+      }
     ],
     rules: [
       {
@@ -190,34 +180,44 @@ export const competitions: Competition[] = [
   },
   {
     id: "pizza-showdown-1",
-    title: "Pizza Showdown: Best Pizza Wins",
-    date: "2025-08-20",
+    title: "Pizza Showdown",
+    date: "2025-04-20",
     description:
-      "Contestants must create the best pizza, showcasing their creativity and culinary skills. The most delicious and unique pizza wins.",
-    status: "upcoming",
-    isSpecial: true,
+      "We travel to Tunquen, a beautiful beach in Chile, to have a pizza showdown. Contestants must create the best pizza using any ingredients they desire.",
+    status: "ongoing",
+    isSpecial: false,
     image: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/masterchef-J5HKuckspbNEbaDZnrQsBp8toR2rRk.png",
-    totalParticipants: 2,
+    totalParticipants: 6,
     type: "pizza-showdown",
     entries: [
       {
-        participantId: "martina-roesller",
-        dishTitle: "Martina's Margherita Deluxe",
+        participantId: "francisco-martina",
+        dishTitle: "TBD",
         description:
-          "Classic Margherita with a twist, topped with fresh basil, parmesan, and a light drizzle of olive oil.",
+          "TBD",
         dishImage: "/placeholder.svg?height=400&width=400",
         score: 95,
         votes: 0,
       },
       {
-        participantId: "francisco-doberti",
-        dishTitle: "Francisco's Spicy Pepperoni Supreme",
+        participantId: "mathias-emilia",
+        dishTitle: "TBD",
         description:
-          "A spicy, savory delight featuring pepperoni, black olives, mozzarella, and a secret spicy sauce.",
+          "TBD",
         dishImage: "/placeholder.svg?height=400&width=400",
         score: 92,
         votes: 0,
       },
+      {
+        participantId: "eric-melissa",
+        dishTitle: "TBD",
+        description:
+          "TBD",
+        dishImage: "/placeholder.svg?height=400&width=400",
+        score: 92,
+        votes: 0,
+      },
+      
     ],
     rules: [
       {
@@ -231,11 +231,7 @@ export const competitions: Competition[] = [
       {
         title: "No Time Limit",
         description: "Contestants are not restricted by a time limit; the focus is on creating the best pizza.",
-      },
-      {
-        title: "Baking",
-        description: "The pizza must be baked to perfection with a golden, crispy crust and delicious toppings.",
-      },
+      }
     ],
   },
   {

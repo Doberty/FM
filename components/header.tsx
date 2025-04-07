@@ -21,7 +21,7 @@ export function Header({ showBackButton = false, title = "BAR" }: HeaderProps) {
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => router.push("/")}
+                onClick={() => router.back()}
                 className="mr-4 h-8 w-8 border-gray-300"
               >
                 <ArrowLeft className="h-4 w-4" />

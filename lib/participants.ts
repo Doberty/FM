@@ -54,6 +54,55 @@ export interface Participant {
         "Winner of Martina's heart",
       ],
     },
+    {
+      id: "francisco-martina",
+      name: "Francisco & Martina",
+      image: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/participants/IMG_0124-J1yBf0OoZFkZiOZ1ViquTmqAZqEClK.jpg",
+      bio: "Best team in all the land, known for their amazing chemistry in the kitchen.",
+      specialties: ["Pasta", "Cupcakes"],
+      funFacts: [
+        "Cutest couple in the world",
+        "On average, they go out dancing 4 times a month",
+        "Competitive as they can be",
+      ],
+      socialMedia: {
+      },
+      achievements: [
+        "Winners of the first edition of Cupcake Wars",
+      ],
+    },
+    {
+      id: "mathias-emilia",
+      name: "Mathias & Emilia",
+      image: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/participants/IMG_0124-J1yBf0OoZFkZiOZ1ViquTmqAZqEClK.jpg",
+      bio: "TBD",
+      specialties: ["tbd", "tbd"],
+      funFacts: [
+        "tbd"
+      ,
+      ],
+      socialMedia: {
+      },
+      achievements: [
+        "tbd",
+      ],
+    },
+    {
+      id: "eric-melissa",
+      name: "Eric & Melissa",
+      image: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/participants/IMG_0124-J1yBf0OoZFkZiOZ1ViquTmqAZqEClK.jpg",
+      bio: "TBD",
+      specialties: ["tbd", "tbd"],
+      funFacts: [
+        "tbd"
+      ,
+      ],
+      socialMedia: {
+      },
+      achievements: [
+        "tbd",
+      ],
+    },
   ]
   
   export function getParticipantById(id: string): Participant | undefined {

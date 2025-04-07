@@ -31,11 +31,11 @@ export default function CookingWarsPage() {
       comingSoon: false,
     },
     {
-      id: "pizza-challenge",
-      title: "Pizza Challenge",
-      description: "Francisco and Martina face off in a battle of flavors and crust mastery where every pizza tells a story, but only one can be crowned champion!",
-      image: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/pizzachalenge-k9RBvZJq9evuVlbKnRjMmXweVZh8e2.png",
-      path: "/cooking/pizza-challenge",
+      id: "sushi-challenge",
+      title: "Sushi Challenge",
+      description: "Francisco and Martina battle it out in a sushi showdown where creativity meets chaos, and the secret ingredient is the ultimate twist!",
+      image: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/masterchef-J5HKuckspbNEbaDZnrQsBp8toR2rRk.png",
+      path: "/cooking/sushi-challenge",
       comingSoon: true,
     },
   ]
