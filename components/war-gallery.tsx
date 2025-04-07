@@ -3,15 +3,12 @@
 import { useState, useEffect } from "react"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Cake, ChefHat, Flame, Camera, Sparkles } from "lucide-react"
+import { Cake, ChefHat, Flame, Camera, Sparkles, X } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import React from "react"
 
 interface GalleryPhoto {
   _id: string
@@ -138,17 +135,13 @@ export function WarGallery({ warId, className }: WarGalleryProps) {
             <Camera className="h-5 w-5 text-muted-foreground" />
             War Chronicles
           </h3>
-          <TabsList className="grid grid-cols-5 h-8">
+          <TabsList className="grid grid-cols-4 h-8">
             <TabsTrigger value="all" className="text-xs px-2">
               All
             </TabsTrigger>
             <TabsTrigger value="preparation" className="text-xs px-2 flex items-center gap-1">
               <ChefHat className="h-3 w-3" />
               <span className="hidden sm:inline">Prep</span>
-            </TabsTrigger>
-            <TabsTrigger value="action" className="text-xs px-2 flex items-center gap-1">
-              <Flame className="h-3 w-3" />
-              <span className="hidden sm:inline">Mayhem</span>
             </TabsTrigger>
             <TabsTrigger value="final" className="text-xs px-2 flex items-center gap-1">
               <Cake className="h-3 w-3" />
@@ -183,27 +176,36 @@ export function WarGallery({ warId, className }: WarGalleryProps) {
       </Tabs>
 
       <Dialog open={!!selectedPhoto} onOpenChange={(open) => !open && setSelectedPhoto(null)}>
-        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-background/95 backdrop-blur-sm">
+        <DialogContent className="max-w-md sm:max-w-lg md:max-w-2xl p-0 overflow-hidden bg-background">
           <div className="relative">
-            <AspectRatio ratio={16 / 9} className="bg-muted">
-              {selectedPhoto && (
-                <Image
-                  src={selectedPhoto.url || "/placeholder.svg"}
-                  alt={selectedPhoto.caption || "Cupcake war photo"}
-                  fill
-                  className="object-contain"
-                />
-              )}
-            </AspectRatio>
-            {selectedPhoto && selectedPhoto.caption && (
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <div className="flex items-center gap-2 mb-1">
-                  <Badge variant="outline" className="bg-black/50 text-white border-none">
-                    {getCategoryIcon(selectedPhoto.category)}
-                    <span className="ml-1">{getCategoryName(selectedPhoto.category)}</span>
-                  </Badge>
+            <div className="absolute top-2 right-2 z-50">
+              <DialogClose asChild>
+                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full bg-black/40 hover:bg-black/60">
+                  <X className="h-4 w-4 text-white" />
+                </Button>
+              </DialogClose>
+            </div>
+
+            {selectedPhoto && (
+              <div className="flex flex-col">
+                <div className="relative w-full h-[50vh] bg-black">
+                  <Image
+                    src={selectedPhoto.url || "/placeholder.svg"}
+                    alt={selectedPhoto.caption || "Cupcake war photo"}
+                    fill
+                    className="object-contain"
+                  />
                 </div>
-                <p className="text-white text-sm">{selectedPhoto.caption}</p>
+
+                <div className="p-4 bg-white">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge className="px-2 py-1">
+                      {getCategoryIcon(selectedPhoto.category)}
+                      <span className="ml-1">{getCategoryName(selectedPhoto.category)}</span>
+                    </Badge>
+                  </div>
+                  {selectedPhoto.caption && <p className="text-sm text-gray-700">{selectedPhoto.caption}</p>}
+                </div>
               </div>
             )}
           </div>
@@ -225,39 +227,33 @@ function PhotoGrid({
   }
 
   return (
-    <div className="p-1">
-      <ScrollArea className="w-full whitespace-nowrap pb-4">
-        <div className="flex flex-wrap gap-2 p-2">
-          {photos.map((photo) => (
-            <Dialog key={photo._id}>
-              <DialogTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="p-0 h-auto rounded-md overflow-hidden"
-                  onClick={() => setSelectedPhoto(photo)}
-                >
-                  <div className="relative w-[150px] h-[100px] md:w-[200px] md:h-[133px] overflow-hidden group">
-                    <Image
-                      src={photo.url || "/placeholder.svg"}
-                      alt={photo.caption || "Cupcake war photo"}
-                      fill
-                      className="object-cover transition-transform group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors">
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Badge variant="outline" className="bg-black/50 text-white border-none text-xs">
-                          {photo.category}
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                </Button>
-              </DialogTrigger>
-            </Dialog>
-          ))}
-        </div>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+    <div className="p-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {photos.map((photo) => (
+          <Button
+            key={photo._id}
+            variant="ghost"
+            className="p-0 h-auto rounded-md overflow-hidden w-full"
+            onClick={() => setSelectedPhoto(photo)}
+          >
+            <div className="relative w-full aspect-[3/2] overflow-hidden group">
+              <Image
+                src={photo.url || "/placeholder.svg"}
+                alt={photo.caption || "Cupcake war photo"}
+                fill
+                className="object-cover transition-transform group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors">
+                <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Badge variant="outline" className="bg-black/50 text-white border-none text-xs">
+                    {photo.category}
+                  </Badge>
+                </div>
+              </div>
+            </div>
+          </Button>
+        ))}
+      </div>
     </div>
   )
 }
