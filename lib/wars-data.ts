@@ -63,7 +63,7 @@ export const competitions: Competition[] = [
           "A deep, cocoa-kissed cupcake with an irresistibly moist crumb, cloaked in a silky cream cheese frosting and drizzled with golden salted caramel. Crowned with a toasted hazelnut, this decadent creation smolders with sweet intensity and a hint of bold elegance — a bite of twilight temptation.",
         dishImage: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/saltedcaramel-JsLTpW1hs7eSdL5Z1D1JdBHTrZJ7ML.jpeg",
         votes: 11,
-        isChampion: true,
+        isChampion: false,
       },
     ],
     rules: [
