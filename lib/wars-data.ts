@@ -41,7 +41,7 @@ export const competitions: Competition[] = [
     type: "cupcake-wars",
     date: "2025-04-06",
     description: "First ever cupcake war at F&M. No rules, no mercy, just cupcakes.",
-    status: "ongoing",
+    status: "completed",
     isSpecial: true,
     specialTheme: "First Edition",
     image: "/placeholder.svg?height=300&width=300",
@@ -53,8 +53,8 @@ export const competitions: Competition[] = [
         description:
           "A luscious vanilla cupcake base, light and fluffy, crowned with a decadent swirl of cream cheese frosting blended with rich white chocolate and tangy cheesecake filling. Finished with a vibrant raspberry on top, this treat strikes the perfect balance between sweet and tart — a dreamy indulgence in every bite.",
         dishImage: "https://gype7srla1ab70k3.public.blob.vercel-storage.com/bar/cheesecake%20raspberry-z4tqU4vpXK0nv1XJmZuIL4bvKCsjKE.jpeg",
-        votes: 10,
-        isChampion: false,
+        votes: 12,
+        isChampion: true,
       },
       {
         participantId: "francisco-doberti",
