@@ -11,3 +11,12 @@ export type Product = {
   type: "cocktail" | "tapas"
   count: number
 }
+
+export interface FreezerItem {
+  id: string
+  name: string
+  type: "protein" | "vegetable" | "meal" | "other"
+  dateAdded: Date
+  quantity?: string
+  consumed: boolean
+}
