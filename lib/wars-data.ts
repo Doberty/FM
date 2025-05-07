@@ -284,6 +284,54 @@ export const competitions: Competition[] = [
       },
     ],
   },
+  {
+    id: "martinas-birthday",
+    title: "Martina's Wonderland",
+    type: "cupcake-wars",
+    date: "2025-07-12",
+    description:
+      "We are going to celebrate Martina's birthday. witht the most lavish of cupcakes. Participants must create a cupcake that represents the spirit of Martina.",
+    status: "upcoming",
+    isSpecial: true,
+    specialTheme: "Martina's Wonderland",
+    image: "/placeholder.svg?height=300&width=300",
+    totalParticipants: 2,
+    entries: [
+      {
+        participantId: "martina-roessler",
+        dishTitle: "TBD",
+        description:
+          "TBD",
+        dishImage: "/placeholder.svg?height=400&width=400",
+        votes: 0,
+        isChampion: false,
+      },
+      {
+        participantId: "francisco-doberti",
+        dishTitle: "TBD ",
+        description:
+          "TBD",
+        dishImage: "/placeholder.svg?height=400&width=400",
+        votes: 0,
+      },
+    ],
+    rules: [
+      {
+        title: "Martina's Spirit",
+        description: "Cupcakes must represent the spirit of Martina.",
+      },
+      {
+        title: "Lavish Ingredients",
+        description:
+          "Participants should use at least one extravagant ingredient (gold leaf, edible flowers, etc.).",
+      },
+      {
+        title: "Presentation",
+        description: "Cupcakes will be judged on appearance, creativity, and execution.",
+      },
+    ],
+  },
+  
   
 ]
 
