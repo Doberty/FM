@@ -45,7 +45,7 @@ export function FreezerItemForm({ onSubmit, onCancel }: FreezerItemFormProps) {
     <div className="space-y-6">
       <div className="space-y-2 text-center">
         <h2 className="text-2xl font-bold">Add New Freezer Item</h2>
-        <p className="text-muted-foreground">Track what's in your freezer to reduce food waste</p>
+        <p className="text-muted-foreground">Track what&apos;s in your freezer to reduce food waste</p>
       </div>
 
       <Form {...form}>
