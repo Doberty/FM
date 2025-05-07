@@ -15,8 +15,9 @@ export type Product = {
 export interface FreezerItem {
   id: string
   name: string
-  type: "protein" | "vegetable" | "meal" | "other"
+  type: "protein" | "vegetable" | "other" | "meal"
   dateAdded: Date
   quantity?: string
   consumed: boolean
 }
+

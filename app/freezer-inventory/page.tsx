@@ -17,7 +17,6 @@ export default function FreezerInventoryPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  // Fetch items on component mount
   useEffect(() => {
     fetchItems()
   }, [])
@@ -96,82 +95,71 @@ export default function FreezerInventoryPage() {
   const proteinItems = items.filter((item) => item.type === "protein" && !item.consumed)
   const vegetableItems = items.filter((item) => item.type === "vegetable" && !item.consumed)
   const mealItems = items.filter((item) => item.type === "meal" && !item.consumed)
-  const consumedItems = items.filter((item) => item.consumed)
   const notConsumedItems = items.filter((item) => !item.consumed)
 
   return (
-    <>  
-    <Header showBackButton={true} title="Freezer" />
+    <>
+      <Header showBackButton={true} title="Freezer" />
 
-    <div className="container mx-auto py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Freezer Inventory</h1>
-        <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
-          <DrawerTrigger asChild>
-            <Button>
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Add Item
-            </Button>
-          </DrawerTrigger>
-          <DrawerContent>
-            <div className="mx-auto w-full max-w-lg p-6">
-              <FreezerItemForm onSubmit={handleAddItem} onCancel={() => setDrawerOpen(false)} />
-            </div>
-          </DrawerContent>
-        </Drawer>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold">Freezer Inventory</h1>
+          <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+            <DrawerTrigger asChild>
+              <Button>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Add Item
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <div className="mx-auto w-full max-w-lg p-6">
+                <FreezerItemForm onSubmit={handleAddItem} onCancel={() => setDrawerOpen(false)} />
+              </div>
+            </DrawerContent>
+          </Drawer>
+        </div>
+
+        <Tabs defaultValue="all" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="protein">Protein</TabsTrigger>
+            <TabsTrigger value="vegetable">Vegetables</TabsTrigger>
+            <TabsTrigger value="meal">Meal</TabsTrigger>
+          </TabsList>
+          <TabsContent value="all">
+            <FreezerItemList
+              items={notConsumedItems}
+              onMarkAsConsumed={handleMarkAsConsumed}
+              onDelete={handleDeleteItem}
+              isLoading={isLoading}
+            />
+          </TabsContent>
+          <TabsContent value="protein">
+            <FreezerItemList
+              items={proteinItems}
+              onMarkAsConsumed={handleMarkAsConsumed}
+              onDelete={handleDeleteItem}
+              isLoading={isLoading}
+            />
+          </TabsContent>
+          <TabsContent value="vegetable">
+            <FreezerItemList
+              items={vegetableItems}
+              onMarkAsConsumed={handleMarkAsConsumed}
+              onDelete={handleDeleteItem}
+              isLoading={isLoading}
+            />
+          </TabsContent>
+          <TabsContent value="meal">
+            <FreezerItemList
+              items={mealItems}
+              onMarkAsConsumed={handleMarkAsConsumed}
+              onDelete={handleDeleteItem}
+              isLoading={isLoading}
+            />
+          </TabsContent>
+        </Tabs>
       </div>
-
-      <Tabs defaultValue="all" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="all">All ({notConsumedItems.length})</TabsTrigger>
-          <TabsTrigger value="protein">Protein ({proteinItems.length})</TabsTrigger>
-          <TabsTrigger value="vegetable">Vegetables ({vegetableItems.length})</TabsTrigger>
-          <TabsTrigger value="meal">Meal ({mealItems.length})</TabsTrigger>
-          <TabsTrigger value="consumed">Consumed ({consumedItems.length})</TabsTrigger>
-        </TabsList>
-        <TabsContent value="all">
-          <FreezerItemList
-            items={notConsumedItems}
-            onMarkAsConsumed={handleMarkAsConsumed}
-            onDelete={handleDeleteItem}
-            isLoading={isLoading}
-          />
-        </TabsContent>
-        <TabsContent value="protein">
-          <FreezerItemList
-            items={proteinItems}
-            onMarkAsConsumed={handleMarkAsConsumed}
-            onDelete={handleDeleteItem}
-            isLoading={isLoading}
-          />
-        </TabsContent>
-        <TabsContent value="vegetable">
-          <FreezerItemList
-            items={vegetableItems}
-            onMarkAsConsumed={handleMarkAsConsumed}
-            onDelete={handleDeleteItem}
-            isLoading={isLoading}
-          />
-        </TabsContent>
-        <TabsContent value="meal">
-          <FreezerItemList
-            items={mealItems}
-            onMarkAsConsumed={handleMarkAsConsumed}
-            onDelete={handleDeleteItem}
-            isLoading={isLoading}
-          />
-        </TabsContent>
-        <TabsContent value="consumed">
-          <FreezerItemList
-            items={consumedItems}
-            onMarkAsConsumed={handleMarkAsConsumed}
-            onDelete={handleDeleteItem}
-            isConsumedList
-            isLoading={isLoading}
-          />
-        </TabsContent>
-      </Tabs>
-    </div>
     </>
   )
 }

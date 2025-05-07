@@ -2,19 +2,18 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { Button } from "../../components/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../../components/ui/form"
-import { Input } from "../../components/ui/input"
-import { Tabs, TabsList, TabsTrigger } from "../../components/ui/tabs"
+import { Button } from "@/components/ui/button"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Beef, Carrot, Package } from "lucide-react"
 import type { FreezerItem } from "../../lib/types"
-import React from "react"
 
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
-  type: z.enum(["protein", "vegetable", "meal"], {
+  type: z.enum(["protein", "vegetable", "other"], {
     required_error: "Please select a type.",
   }),
   quantity: z.string().optional(),
@@ -82,9 +81,9 @@ export function FreezerItemForm({ onSubmit, onCancel }: FreezerItemFormProps) {
                         <Carrot className="h-4 w-4" />
                         <span>Vegetable</span>
                       </TabsTrigger>
-                      <TabsTrigger value="meal" className="flex items-center gap-2">
+                      <TabsTrigger value="other" className="flex items-center gap-2">
                         <Package className="h-4 w-4" />
-                        <span>Meal</span>
+                        <span>Other</span>
                       </TabsTrigger>
                     </TabsList>
                   </Tabs>
@@ -99,7 +98,7 @@ export function FreezerItemForm({ onSubmit, onCancel }: FreezerItemFormProps) {
             name="quantity"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Quantity (Optional)</FormLabel>
+                <FormLabel>Quantity</FormLabel>
                 <FormControl>
                   <Input placeholder="500g, 2 pieces, etc." {...field} />
                 </FormControl>
