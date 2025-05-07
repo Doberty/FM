@@ -95,7 +95,6 @@ export default function FreezerInventoryPage() {
   const proteinItems = items.filter((item) => item.type === "protein" && !item.consumed)
   const vegetableItems = items.filter((item) => item.type === "vegetable" && !item.consumed)
   const mealItems = items.filter((item) => item.type === "meal" && !item.consumed)
-  const consumedItems = items.filter((item) => item.consumed)
   const notConsumedItems = items.filter((item) => !item.consumed)
 
   return (
@@ -121,12 +120,11 @@ export default function FreezerInventoryPage() {
         </div>
 
         <Tabs defaultValue="all" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="all">All ({notConsumedItems.length})</TabsTrigger>
-            <TabsTrigger value="protein">Protein ({proteinItems.length})</TabsTrigger>
-            <TabsTrigger value="vegetable">Vegetables ({vegetableItems.length})</TabsTrigger>
-            <TabsTrigger value="meal">Meal ({mealItems.length})</TabsTrigger>
-            <TabsTrigger value="consumed">Consumed ({consumedItems.length})</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="protein">Protein</TabsTrigger>
+            <TabsTrigger value="vegetable">Vegetables</TabsTrigger>
+            <TabsTrigger value="meal">Meal</TabsTrigger>
           </TabsList>
           <TabsContent value="all">
             <FreezerItemList
@@ -157,15 +155,6 @@ export default function FreezerInventoryPage() {
               items={mealItems}
               onMarkAsConsumed={handleMarkAsConsumed}
               onDelete={handleDeleteItem}
-              isLoading={isLoading}
-            />
-          </TabsContent>
-          <TabsContent value="consumed">
-            <FreezerItemList
-              items={consumedItems}
-              onMarkAsConsumed={handleMarkAsConsumed}
-              onDelete={handleDeleteItem}
-              isConsumedList
               isLoading={isLoading}
             />
           </TabsContent>
